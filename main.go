@@ -37,9 +37,11 @@ func cssRequestHandler(ctx *fasthttp.RequestCtx, ps fasthttprouter.Params) {
 	// recovering path.
 	if path[0:5] == "https" {
 		path = "https://" + path[7:]
-	}
-	if path[0:4] == "http" {
+	} else if path[0:4] == "http" {
 		path = "http://" + path[6:]
+	} else {
+		path = "http://" + path
+
 	}
 	// resp, err := http.Get(path)
 	// if err != nil {
