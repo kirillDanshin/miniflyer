@@ -4,6 +4,8 @@ import (
 	"flag"
 	"log"
 	// "net/http"
+	"bufio"
+	"bytes"
 
 	"github.com/buaazp/fasthttprouter"
 	"github.com/tdewolff/minify"
@@ -60,5 +62,11 @@ func cssRequestHandler(ctx *fasthttp.RequestCtx, ps fasthttprouter.Params) {
 	if err != nil {
 		log.Printf("%s\n", err)
 	}
-	ctx.WriteGzip(res)
+	ctx.Response.AppendBody(res)
+	var b bytes.Buffer
+	bWriter := bufio.NewWriter(&b)
+	ctx.Response.WriteGzip(bWriter)
+	// log.Printf("bWriter %#+v", bWriter)
+	// ctx.Response.SetBody(bWriter)
+
 }
