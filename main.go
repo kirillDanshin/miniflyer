@@ -60,5 +60,5 @@ func cssRequestHandler(ctx *fasthttp.RequestCtx, ps fasthttprouter.Params) {
 	if err != nil {
 		log.Printf("%s\n", err)
 	}
-	ctx.Write(res)
+	ctx.WriteGzip(res)
 }
