@@ -53,6 +53,7 @@ func cssRequestHandler(ctx *fasthttp.RequestCtx, ps fasthttprouter.Params) {
 		log.Printf("%s\n", err)
 		ctx.Error("Invalid request", 400)
 	}
+	ctx.SetContentType("text/css")
 	res, err := minifier.Bytes("style/css", body)
 	if err != nil {
 		log.Printf("%s\n", err)
